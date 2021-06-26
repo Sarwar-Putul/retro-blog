@@ -1,33 +1,59 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import "tailwindcss/tailwind.css";
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { UserContext } from '../../App';
 
 const Navbar = () => {
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext)
+
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    useEffect(() => {
+        fetch('https://mysterious-oasis-52654.herokuapp.com/isAdmin', {
+            method:'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify({email: loggedInUser.email})
+        })
+        .then(response => response.json())
+        .then(data => {
+            setIsAdmin(data)
+        })
+
+    }, [])
     return (
-        <>
-            <header class="text-gray-600 body-font">
-                <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-                    <nav class="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto">
-                        <Link to="/" class="mr-5 hover:text-gray-900">Home</Link>
-                        <Link to="/addAdmin" class="mr-5 hover:text-gray-900">About</Link>
-                        <a class="mr-5 hover:text-gray-900">Contact Us</a>
-                    </nav>
-                    <a class="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center text-gray-900 lg:items-center lg:justify-center mb-4 md:mb-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-yellow-500 rounded-full" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                    </svg>
-                    <span class="ml-3 text-xl">SP.BLOGS</span>
-                    </a>
-                    <div class="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
-                    <Link to="/writeBlog"><button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Write Blog
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-                        <path d="M5 12h14M12 5l7 7-7 7"></path>
-                        </svg>
-                    </button></Link>
+            <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+                <div class="container-fluid ">
+                    <Link to="/" class="navbar-brand text-warning" href="#">SP BLOGS</Link>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <Link to="/" class="nav-link active text-warning" aria-current="page" href="#">Home</Link>
+                            </li>
+                            <li class="nav-item">
+                                <Link to="/login" class="nav-link text-warning" href="#">Login</Link>
+                            </li>
+                            <li class="nav-item">
+                                <Link class="nav-link text-warning" href="#">About</Link>
+                            </li>
+                {/* {isAdmin &&  */}
+                            <li class="nav-item dropdown">
+                                <Link class="nav-link dropdown-toggle text-warning" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Dashboard </Link>
+                                <ul class="dropdown-menu bg-dark " aria-labelledby="navbarDropdownMenuLink">
+                                    <li><Link to="/addAdmin" class="dropdown-item text-warning" href="#">Add Admin</Link></li>
+                                    <li><Link to="/writeBlog" class="dropdown-item text-warning" href="#">Write Blog</Link></li>
+                                    <li><Link to="/manageBlog" class="dropdown-item text-warning" href="#">Manage Blog</Link></li>
+                                </ul>
+                            </li> 
+                    {/* } */}
+                        </ul>
                     </div>
                 </div>
-            </header>
-        </>
+            </nav>
+        
     );
 };
 

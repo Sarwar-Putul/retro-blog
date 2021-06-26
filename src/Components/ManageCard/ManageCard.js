@@ -5,7 +5,7 @@ const ManageCard = ({blog}) => {
 
 
     const deleteBlog = (id) =>{
-        fetch(`http://localhost:5000/delete/${id}`, {
+        fetch(`https://mysterious-oasis-52654.herokuapp.com/delete/${id}`, {
             method: 'DELETE'
         })
         .then(res => res.json())
@@ -22,7 +22,7 @@ const ManageCard = ({blog}) => {
                         {
                             blog.image ? <img alt="gallery" class="absolute img-fluid inset-0 h-full object-cover object-center" src={`data:image/png;base64,${blog.image.img}`} /> 
                             :
-                            <img alt="gallery" class="absolute img-fluid inset-0 w-full h-full object-cover object-center" src={`http://localhost:5000/${blog.img}`} /> 
+                            <img alt="gallery" class="absolute img-fluid inset-0 w-full h-full object-cover object-center" src={`https://mysterious-oasis-52654.herokuapp.com/${blog.img}`} /> 
                         }
                         <div class="px-8 py-10 relative text-part z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
                             <button className="btn-danger" onClick={() =>deleteBlog(blog._id)}>Delete</button>

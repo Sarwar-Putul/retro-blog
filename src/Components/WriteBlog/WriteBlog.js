@@ -29,7 +29,7 @@ const WriteBlog = () => {
             formData.append('name', info.name);
             formData.append('description', info.description);
 
-            fetch('http://localhost:5000/addBlog',{
+            fetch('https://mysterious-oasis-52654.herokuapp.com/addBlog',{
                 method: 'POST',
                 body: formData
             })

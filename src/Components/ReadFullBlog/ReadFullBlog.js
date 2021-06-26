@@ -9,7 +9,7 @@ const ReadFullBlog = () => {
     const [fullBlog, setFullBlog] = useState({});
 
     useEffect(() => {
-        fetch(`http://localhost:5000/blog/${id}`)
+        fetch(`https://mysterious-oasis-52654.herokuapp.com/blog/${id}`)
         .then(response => response.json())
         .then(data => setFullBlog(data))
     }, [id]);

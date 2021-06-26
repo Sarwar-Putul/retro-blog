@@ -16,7 +16,7 @@ const AddAdmin = () => {
             formData.append('name', admin.name);
             formData.append('email', admin.email);
 
-            fetch('http://localhost:5000/addAdmin', {
+            fetch('https://mysterious-oasis-52654.herokuapp.com/addAdmin', {
                 method: 'POST',
                 body: formData
             })
