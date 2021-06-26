@@ -1,0 +1,14 @@
+.blog {
+    height: 300px;
+    overflow: hidden;
+    cursor: pointer;
+    
+}
+.photo img{
+    overflow: hidden;
+
+}
+
+Link {
+    text-decoration: none;
+}

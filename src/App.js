@@ -1,24 +1,42 @@
-import logo from './logo.svg';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import './App.css';
+import Home from './Components/Home/Home';
+import WriteBlog from './Components/WriteBlog/WriteBlog';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ReadFullBlog from './Components/ReadFullBlog/ReadFullBlog'
+import ManageBlog from "./Components/ManageBlog/ManageBlog";
+import AddAdmin from "./Components/AddAdmin/AddAdmin"
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/writeBlog">
+            <WriteBlog />
+          </Route>
+          <Route path="/readFullBlog/:id">
+            <ReadFullBlog />
+          </Route>
+          <Route path="/manageBlog">
+            <ManageBlog />
+          </Route>
+          <Route path="/addAdmin">
+            <AddAdmin />
+          </Route>
+
+      </Switch>
+    </Router>
   );
 }
 
